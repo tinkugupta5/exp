@@ -37,7 +37,6 @@ const loginController = async(req,res) => {
 const registerController = async(req,res) => {
 
     try {
-
         const newUser = new userModel(req.body)
         await newUser.save()
         res.status(201).json({
@@ -46,8 +45,6 @@ const registerController = async(req,res) => {
         })
         
     } catch (error) {
-
-
         res.status(400).json({
             success:false,
             error
