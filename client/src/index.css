@@ -6,6 +6,13 @@
 
 .content {
   
-  height: 80vh;
+  height: 86vh;
 
+}
+
+.register-page{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
 }
