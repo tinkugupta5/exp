@@ -23,9 +23,11 @@ app.use(cors());
 
 //routes
 
-app.get("/", (req,res) => {
-    res.send("<h1>Hellow form server</h1>")
-})
+// app.get("/", (req,res) => {
+//     res.send("<h1>Hellow form server</h1>")
+// })
+
+app.use('/api/v1/users',require('./routes/userRoute'))
 
 //port 
 

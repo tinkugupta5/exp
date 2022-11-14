@@ -1,24 +1,37 @@
-import React from 'react'
-import { Form, Input } from 'antd';
-import { Link } from 'react-router-dom';
+import React,{useState} from 'react'
+import { Form, Input,message } from 'antd';
+import { Link,useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Spinner from '../components/Spinner';
 
 
 export const Login = () => {
+  const navigate = useNavigate();
+  const [loading,setLoading] = useState(false);
 
      // submit
-     const submitHandler = (values) => {
-
-        console.log(values)
-
+     const submitHandler = async(values) => {
+      // console.log(values)
+      try {
+            setLoading(true)
+            const {data} = await axios
+            .post('/users/login',values)
+            setLoading(false)
+            message.success('Login Sucessfull');
+            localStorage.setItem('user',JSON.stringify({...data,password:""}))
+            
+            navigate('/')           
+        } catch (error) {
+            setLoading(false)
+            message.error("Something went wrong")
+            
+        }
     }
-
-
 
   return (
     <>
-
-
 <div className=' register-page'>
+  {loading && <Spinner/>}
        <Form layout='vertical'  onFinish={submitHandler}> 
        <h1>Register Form</h1>
           
@@ -36,9 +49,6 @@ export const Login = () => {
             <button className='btn btn-primary'>Register</button>
        </Form>
     </div>
-
-
-
     </>
   )
 }
