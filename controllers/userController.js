@@ -1,5 +1,5 @@
 
-const userModel = require('../models/userModel')
+import userModel, { findOne } from '../models/userModel';
 
 
 //login call back function
@@ -12,7 +12,7 @@ const loginController = async(req,res) => {
         //desstructure user login data 
 
         const {email,password} = req.body
-        await userModel.findOne({email,password});
+        const user = await findOne({email,password});
         if(!user) {
             return res.status(404).send("User Not Found")
         }
@@ -55,4 +55,4 @@ const registerController = async(req,res) => {
 }
 
 
-module.exports = {loginController,registerController};
+export default {loginController,registerController};

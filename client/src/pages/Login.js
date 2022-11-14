@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { Form, Input,message } from 'antd';
 import { Link,useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -14,11 +14,10 @@ export const Login = () => {
       // console.log(values)
       try {
             setLoading(true)
-            const {data} = await axios
-            .post('/users/login',values)
+            const {data} = await axios.post("/users/login",values)           
             setLoading(false)
             message.success('Login Sucessfull');
-            localStorage.setItem('user',JSON.stringify({...data,password:""}))
+            localStorage.setItem("user",JSON.stringify({...data.user,password:""}))
             
             navigate('/')           
         } catch (error) {
@@ -28,8 +27,16 @@ export const Login = () => {
         }
     }
 
+    //prevent for login user 
+    useEffect(() => {
+      if (localStorage.getItem("user")) {
+        navigate("/");
+      }
+    }, [navigate]);
+
   return (
     <>
+    {/* <div className=' register-page'> */}
 <div className=' register-page'>
   {loading && <Spinner/>}
        <Form layout='vertical'  onFinish={submitHandler}> 
