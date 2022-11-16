@@ -30,6 +30,11 @@ const Register = () => {
       navigate("/");
     }
   }, [navigate]);
+
+
+
+// prevent for login user
+
   return (
     <>
 

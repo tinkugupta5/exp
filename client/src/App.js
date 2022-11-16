@@ -1,4 +1,4 @@
-import { Route,Routes } from 'react-router-dom';
+import { Navigate, Route,Routes } from 'react-router-dom';
 import Homepage from './pages/Homepage';
 import './App.css';
 import Register from './pages/Register';
@@ -8,12 +8,25 @@ function App() {
   return (
     <>
     <Routes>
-      <Route path="/" element={<Homepage/>}/>
+      {/* step second for proteced route define function */}
+      <Route path="/" element={<ProtectedRoutes><Homepage/></ProtectedRoutes>}/>
       <Route path="/register" element={<Register/>}/>
       <Route path="/login" element={<Login/>}/>
     </Routes>
     </>
   );
+}
+
+// Protected Route function step 1 ( proteched route )
+export function ProtectedRoutes(props)
+{
+
+  if(localStorage.getItem('user')) {
+    return props.children
+  } else {
+    return <Navigate to="/login" />
+  }
+
 }
 
 export default App;
