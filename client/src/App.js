@@ -17,7 +17,7 @@ function App() {
   );
 }
 
-// Protected Route function step 1 ( proteched route )
+// Protected Route function step 1 ( proteched route ) its acts asa component  component
 export function ProtectedRoutes(props)
 {
 
