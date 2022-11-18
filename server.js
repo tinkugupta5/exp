@@ -27,14 +27,17 @@ app.use(cors());
 //     res.send("<h1>Hellow form server</h1>")
 // })
 
+
+//users routes for login and registration
 app.use('/api/v1/users',require('./routes/userRoute'))
 
-//port 
+//transections routes
+app.use('/api/v1/transections',require("./routes/transectionRoutes"))
 
+//port 
 const PORT = 8080 || process.env.PORT;
 
 // LISTEN SERVER
-
 app.listen(PORT,() => {
     console.log(`Server running on port ${PORT}`);
 })
