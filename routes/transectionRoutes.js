@@ -2,6 +2,8 @@
 const express = require('express')
 const {addTransection,getAllTransection} = require("../controllers/transectionCtrl")
 
+// const transectionCtrl = require(./transactionCtrl.js)
+
 //router Object 
 const router = express.Router()
 
@@ -9,6 +11,7 @@ const router = express.Router()
 
 //add transection POST Method
 router.post('/add-transection',addTransection)
+
 
 //get transections
 router.post('/get-transection',getAllTransection)

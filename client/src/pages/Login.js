@@ -43,7 +43,7 @@ export const Login = () => {
 <div className=' register-page'>
   {loading && <Spinner/>}
        <Form layout='vertical'  onFinish={submitHandler}> 
-       <h1>Register Form</h1>
+       <h1>Login Form</h1>
           
             <Form.Item label="Email" name="email">
                 <Input type='email'/>
