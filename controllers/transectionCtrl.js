@@ -23,6 +23,5 @@ const addTransection = async(req,res) => {
 }
 
 module.exports = {getAllTransection,addTransection};
-
 // export.getalltrac
 // export.addtransaction
