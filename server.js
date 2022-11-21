@@ -27,7 +27,6 @@ app.use(cors());
 //     res.send("<h1>Hellow form server</h1>")
 // })
 
-
 //users routes for login and registration
 app.use('/api/v1/users',require('./routes/userRoute'))
 

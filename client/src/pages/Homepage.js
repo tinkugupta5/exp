@@ -3,6 +3,8 @@ import {Modal, Select} from 'antd'
 import { Form, Input } from 'antd';
 import Layout from './../components/Layout/Layout';
 import axios from 'axios'
+import { message } from 'antd';
+import Spinner from '../components/Spinner';
 
 const Homepage = () => {
   const [showModal,setShowModal] = useState(false);
@@ -15,8 +17,14 @@ const Homepage = () => {
 
       const user = JSON.parse(localStorage.getItem('user'))
       setLoading(true)
-      await axios.post('/transections/add-transection',{...values,userid:user._id})      
+      await axios.post('/transections/add-transection',{...values,userid:user._id})   
+      setLoading(false)
+      message.success('Transaction Added Successfully')
+      setShowModal(false)
     } catch (error) {
+
+      setLoading(false)
+      message.error('Faild to add transection');
       
     }
     
@@ -24,6 +32,7 @@ const Homepage = () => {
 
   return (
     <Layout>
+      {loading && <Spinner/>}
       <div className='filters'>
         <div>Range Filters</div>
         <div><button className='btn btn-primary' onClick={() => setShowModal(true)}>Add New</button></div>
