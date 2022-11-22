@@ -1,14 +1,40 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {Modal, Select} from 'antd'
 import { Form, Input } from 'antd';
 import Layout from './../components/Layout/Layout';
 import axios from 'axios'
 import { message } from 'antd';
 import Spinner from '../components/Spinner';
+import { json } from 'react-router-dom';
 
 const Homepage = () => {
   const [showModal,setShowModal] = useState(false);
   const[loading,setLoading] = useState(false)
+  // Too hold the values commig from server 
+  const [getAllTransection,setAllTransection] = useState([])
+
+  // getall transactions
+  const getAllTransaction = async () => {
+    try {
+      const user = JSON.parse(localStorage.getItem('user'))
+      setLoading(true)
+      const res = await axios.post('/transections/get-transection',{userid:user._id})
+      setLoading(false) 
+      setAllTransection(res.data)
+      console.log(res.data)
+    } catch (error) {
+      console.log(error)
+      message.error('Fetch issue with transaction')
+    }
+  }
+
+  // useEffect Hook
+  useEffect(() => {
+
+    getAllTransaction();
+
+  },[])
+
 
   // form handling
   const handleSubmit = async(values) => {
