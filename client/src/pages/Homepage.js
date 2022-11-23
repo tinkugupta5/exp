@@ -1,17 +1,46 @@
 import React,{useState,useEffect} from 'react'
 import {Modal, Select} from 'antd'
-import { Form, Input } from 'antd';
+import { Form, Input,Table } from 'antd';
 import Layout from './../components/Layout/Layout';
 import axios from 'axios'
 import { message } from 'antd';
 import Spinner from '../components/Spinner';
-import { json } from 'react-router-dom';
+// import { json } from 'react-router-dom';
 
 const Homepage = () => {
   const [showModal,setShowModal] = useState(false);
   const[loading,setLoading] = useState(false)
   // Too hold the values commig from server 
-  const [getAllTransection,setAllTransection] = useState([])
+  const [allTransection,setAllTransection] = useState([])
+
+  //table data
+  const columns = [
+    {
+      title:'Amount',
+      dataIndex:'amount'
+    },
+
+    {
+      title:'Type',
+      dataIndex:'type'
+    },
+
+    {
+      title:'Category',
+      dataIndex:'date'
+    },
+
+    {
+      title:'Refrence',
+      dataIndex:'refrence'
+    },
+    {
+      title:'Actions',
+      
+    }
+    
+
+  ]
 
   // getall transactions
   const getAllTransaction = async () => {
@@ -47,11 +76,10 @@ const Homepage = () => {
       setLoading(false)
       message.success('Transaction Added Successfully')
       setShowModal(false)
+      window.location.reload();
     } catch (error) {
-
       setLoading(false)
-      message.error('Faild to add transection');
-      
+      message.error('Faild to add transection');     
     }
     
   }
@@ -64,6 +92,9 @@ const Homepage = () => {
         <div><button className='btn btn-primary' onClick={() => setShowModal(true)}>Add New</button></div>
       </div>
       <div className='content'>
+        <Table columns={columns} dataSource={allTransection}/>
+      </div>
+
         <Modal title="Add Transaction"
          open={showModal} 
          onCancel={() => setShowModal(false)} footer={false}>
@@ -114,7 +145,6 @@ const Homepage = () => {
           </Form>
           
         </Modal>
-      </div>
     </Layout>
   )
 }
