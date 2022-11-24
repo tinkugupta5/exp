@@ -81,7 +81,6 @@ const Homepage = () => {
       setLoading(false)
       message.error('Faild to add transection');     
     }
-    
   }
 
   return (
