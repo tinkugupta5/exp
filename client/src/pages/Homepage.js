@@ -49,7 +49,7 @@ const Homepage = () => {
       setLoading(true)
       const res = await axios.post('/transections/get-transection',{userid:user._id})
       setLoading(false) 
-      setAllTransection(res.data)
+      setAllTransection(res.data.reverse())
       console.log(res.data)
     } catch (error) {
       console.log(error)
