@@ -7,11 +7,9 @@ const router = express.Router()
 
 //router
 //POST || LOGIN user
-
 router.post('/login',loginController)
 
 //POST || Register user
-
 router.post('/register',registerController)
 
 
