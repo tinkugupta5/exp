@@ -27,7 +27,7 @@ const Homepage = () => {
 
     {
       title:'Category',
-      dataIndex:'date'
+      dataIndex:'category'
     },
 
     {
@@ -81,14 +81,24 @@ const Homepage = () => {
 
   return (
     <Layout>
+
+      {/* spinner  */}
       {loading && <Spinner/>}
+
+      {/* filter */}
       <div className='filters'>
         <div>Range Filters</div>
         <div><button className='btn btn-primary' onClick={() => setShowModal(true)}>Add New</button></div>
       </div>
+      
+
+      {/*  table data  */}
       <div className='content'>
         <Table columns={columns} dataSource={allTransection}/>
       </div>
+
+
+      {/* model form */}
 
         <Modal title="Add Transaction"
          open={showModal} 
