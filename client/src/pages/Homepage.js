@@ -87,7 +87,15 @@ const Homepage = () => {
 
       {/* filter */}
       <div className='filters'>
-        <div>Range Filters</div>
+        <div>
+          <Select>
+          <h6>Select Frequency</h6>
+          <Select.Option>Last 1 Week</Select.Option>
+          <Select.Option>Last 1 Month</Select.Option>
+          <Select.Option>Last 1 Year</Select.Option>
+          <Select.Option>Custom</Select.Option>
+          </Select>
+        </div>
         <div><button className='btn btn-primary' onClick={() => setShowModal(true)}>Add New</button></div>
       </div>
       
@@ -150,6 +158,7 @@ const Homepage = () => {
           </Form>
           
         </Modal>
+
     </Layout>
   )
 }
