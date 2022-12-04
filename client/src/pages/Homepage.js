@@ -1,52 +1,68 @@
 import React,{useState,useEffect} from 'react'
 import {Modal, Select} from 'antd'
-import { Form, Input,Table } from 'antd';
+import { Form, Input,Table,DatePicker } from 'antd';
 import Layout from './../components/Layout/Layout';
 import axios from 'axios'
 import { message } from 'antd';
 import Spinner from '../components/Spinner';
+import moment from "moment";
+const { RangePicker } = DatePicker;
 // import { json } from 'react-router-dom';
+
 
 const Homepage = () => {
   const [showModal,setShowModal] = useState(false);
   const[loading,setLoading] = useState(false)
+  const [frequency,setFrequency] = useState('7');
   // Too hold the values commig from server 
   const [allTransection,setAllTransection] = useState([])
+  const [selectedDate,setSelectedate] =useState([])
+  const [type,setType] = useState("all");
 
   //table data
   const columns = [
     {
-      title:'Amount',
-      dataIndex:'amount'
-    },
-
-    {
-      title:'Type',
-      dataIndex:'type'
-    },
-
-    {
-      title:'Category',
-      dataIndex:'category'
-    },
-
-    {
-      title:'Refrence',
-      dataIndex:'refrence'
+      title: "Date",
+      dataIndex: "date",
+      render: (text) => <span>{moment(text).format("YYYY-MM-DD")}</span>,
     },
     {
-      title:'Actions',
-      
-    }
-    
-  ]
+      title: "Amount",
+      dataIndex: "amount",
+    },
+    {
+      title: "Type",
+      dataIndex: "type",
+    },
+    {
+      title: "Category",
+      dataIndex: "category",
+    },
+    {
+      title: "Refrence",
+      dataIndex: "refrence",
+    },
+    {
+      title: "Actions",
+    },
+  ];
 
-  // getall transactions
+ 
+
+  // useEffect Hook
+  useEffect(() => {
+     // getall transactions
   const getAllTransaction = async () => {
     try {
       const user = JSON.parse(localStorage.getItem('user'))
       setLoading(true)
-      const res = await axios.post('/transections/get-transection',{userid:user._id})
+      const res = await axios.post('/transections/get-transection',{
+        userid:user._id,
+        frequency,
+        selectedDate,
+        type
+      });
+
       setLoading(false) 
       setAllTransection(res.data.reverse())
       console.log(res.data)
@@ -55,11 +71,8 @@ const Homepage = () => {
       message.error('Fetch issue with transaction')
     }
   }
-
-  // useEffect Hook
-  useEffect(() => {
     getAllTransaction();
-  },[])
+  },[frequency,selectedDate,type])
 
 
   // form handling
@@ -88,13 +101,40 @@ const Homepage = () => {
       {/* filter */}
       <div className='filters'>
         <div>
-          <Select>
           <h6>Select Frequency</h6>
-          <Select.Option>Last 1 Week</Select.Option>
-          <Select.Option>Last 1 Month</Select.Option>
-          <Select.Option>Last 1 Year</Select.Option>
-          <Select.Option>Custom</Select.Option>
+          <Select value={frequency} onChange={(values) => setFrequency(values)}>
+          <h6>Select Frequency</h6>
+          <Select.Option value="7">Last 1 Week</Select.Option>
+          <Select.Option value="30">Last 1 Month</Select.Option>
+          <Select.Option value="365">Last 1 Year</Select.Option>
+          <Select.Option value="custom" >Custom</Select.Option>
           </Select>
+
+          {frequency === "custom" && (
+            <RangePicker
+              value={selectedDate}
+              onChange={(values) => setSelectedate(values)}
+            />
+          )}
+
+        </div>
+        <div>
+          <h6>Select Type</h6>
+          <Select value={type} onChange={(values) => setType(values)}>
+          <h6>Select Frequency</h6>
+          <Select.Option value="all">ALL</Select.Option>
+          <Select.Option value="income">INCOME</Select.Option>
+          <Select.Option value="expense">EXPENSE</Select.Option>
+           
+          </Select>
+
+          {frequency === "custom" && (
+            <RangePicker
+              value={selectedDate}
+              onChange={(values) => setSelectedate(values)}
+            />
+          )}
+
         </div>
         <div><button className='btn btn-primary' onClick={() => setShowModal(true)}>Add New</button></div>
       </div>
