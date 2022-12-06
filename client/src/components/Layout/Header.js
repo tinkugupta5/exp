@@ -42,7 +42,7 @@ const Header = () => {
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">               
                 <p className="nav-link">{loginUser && loginUser.name}</p>
-              </li>
+              </li> 
               <li className="nav-item">
                 <button className="btn btn-primary" onClick={logoutHandler}>
                   Logout
