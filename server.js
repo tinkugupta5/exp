@@ -6,7 +6,6 @@ const colors = require('color')
 const connectDB = require("./config/connectDB")
 
 //CONFIG DOT ENV FILE
-
 dotenv.config();
 
 // database call
