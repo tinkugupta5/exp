@@ -137,8 +137,15 @@ const Homepage = () => {
         {/* graph */}
 
         <div className="switch-icons"> 
-            <UnorderedListOutlined className="mx-2" onClick={() => setViewData("table")} />
-            <AreaChartOutlined  className="mx-2" onClick={() => setViewData("analytics")} />
+        
+            <UnorderedListOutlined className={`mx-2 ${
+              viewData === "table" ? "active-icon" : "inactive-icon"
+            }`} onClick={() => setViewData("table")} />
+
+            <AreaChartOutlined  className={`mx-2 ${
+              viewData === "analytics" ? "active-icon" : "inactive-icon"
+            }`} onClick={() => setViewData("analytics")} />
+
           </div>
 
           {/* graph */}
