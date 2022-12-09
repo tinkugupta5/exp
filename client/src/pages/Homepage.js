@@ -6,6 +6,7 @@ import axios from "axios";
 import { message } from "antd";
 import Spinner from "../components/Spinner";
 import moment from "moment";
+import Analytics from "../components/Analytics"; 
 import { UnorderedListOutlined, AreaChartOutlined } from "@ant-design/icons";
 const { RangePicker } = DatePicker;
 // import { json } from 'react-router-dom';
@@ -134,10 +135,10 @@ const Homepage = () => {
           )}
         </div>
 
-        {/* graph */}
+        {/* graph switch */}
 
         <div className="switch-icons"> 
-        
+
             <UnorderedListOutlined className={`mx-2 ${
               viewData === "table" ? "active-icon" : "inactive-icon"
             }`} onClick={() => setViewData("table")} />
@@ -164,7 +165,11 @@ const Homepage = () => {
 
       {/*  table data  */}
       <div className="content">
-        <Table columns={columns} dataSource={allTransection} />
+        {viewData === "table" ? (
+          <Table columns={columns} dataSource={allTransection} />
+        ) : (
+          <Analytics allTransection={allTransection} />
+        )}
       </div>
       {/* table end */}
 
