@@ -34,7 +34,6 @@ const transectionSchema = new mongoose.Schema ({
         type:Date,
         require:[true,'data is required']
     }
-
     
 },{timestamps:true})
 
