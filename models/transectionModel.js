@@ -13,6 +13,7 @@ const transectionSchema = new mongoose.Schema ({
     category:{
         type:String,
         required:[true,'Category is require']
+        
     },
 
     type:{
