@@ -174,7 +174,6 @@ const Homepage = () => {
       {/* table end */}
 
       {/* model form */}
-
       <Modal
         title="Add Transaction"
         open={showModal}
