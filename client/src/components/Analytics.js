@@ -3,12 +3,18 @@ import { Progress, Space } from 'antd';
 
 const Analytics = ({allTransection}) => {
 
+  // total transaction   
+
   const totalTransaction = allTransection.length
   console.log("this is analytics value",totalTransaction);
   const totalIncomeTransactions = allTransection.filter(transaction => transaction.type ==='income')
   const totalExpenseTransactions = allTransection.filter(transaction => transaction.type ==='expense')
   const totalIncomePercent = (totalIncomeTransactions.length/totalTransaction)*100
   const totalExpensePercent =(totalExpenseTransactions.length / totalTransaction) * 100;
+
+  //total turn over
+
+  const totalTurnover = allTransection.reduce((acc,transaction) => acc+transaction.amount,0);
 
 
 
