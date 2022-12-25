@@ -41,7 +41,7 @@ const Analytics = ({allTransection}) => {
         </div>
       </div>
 
-      {/* 14:32 */}
+      {/* 22:02 */}
     </div>
   )
 }
