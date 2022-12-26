@@ -22,7 +22,6 @@ const Analytics = ({allTransection}) => {
   return (
     <div>
       <h1>This is new</h1>
-
       <div className='row'>
         <div className='col-md-4'>
           <div className='card'>
@@ -41,7 +40,7 @@ const Analytics = ({allTransection}) => {
         </div>
       </div>
 
-      {/* 22:02 */}
+      {/* 22:02 */} 
     </div>
   )
 }
