@@ -54,4 +54,19 @@ const registerController = async(req,res) => {
 }
 
 
+const resostration = async(req,res) {
+    const newUser = 
+}
+
+
 module.exports = { loginController, registerController };
+
+
+// uttar - north -rog
+// pachim  - west - chintaye
+
+// south -
+// east -
+
+// north 
+// east
