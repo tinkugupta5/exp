@@ -13,8 +13,8 @@ const Analytics = ({allTransection}) => {
   const totalExpensePercent =(totalExpenseTransactions.length / totalTransaction) * 100;
 
   //total turn over
+ const totalTurnover = allTransection.reduce((acc,transaction) => acc+transaction.amount,0);
 
-  const totalTurnover = allTransection.reduce((acc,transaction) => acc+transaction.amount,0);
 
 
 
