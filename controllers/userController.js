@@ -54,10 +54,6 @@ const registerController = async(req,res) => {
 }
 
 
-const resostration = async(req,res) {
-    const newUser = 
-}
-
 
 module.exports = { loginController, registerController };
 
