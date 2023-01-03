@@ -11,6 +11,7 @@ const Register = () => {
 
     // submit
     const submitHandler = async(values) => {
+      console.log('vales at its peaks ',values);
         try {
             setLoading(true)
             await axios.post('/users/register',values)           
