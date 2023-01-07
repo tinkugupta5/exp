@@ -34,9 +34,6 @@ export const Login = () => {
       }
     }, [navigate]);
 
-
-    
-
   return (
     <>
     {/* <div className=' register-page'> */}

@@ -7,7 +7,7 @@ import { message } from "antd";
 import Spinner from "../components/Spinner";
 import moment from "moment";
 import Analytics from "../components/Analytics"; 
-import { UnorderedListOutlined, AreaChartOutlined } from "@ant-design/icons";
+import { UnorderedListOutlined, AreaChartOutlined , EditOutlined,DeleteFilled, DeleteColumnOutlined } from "@ant-design/icons";
 const { RangePicker } = DatePicker;
 // import { json } from 'react-router-dom';
 
@@ -21,6 +21,8 @@ const Homepage = () => {
   const [type, setType] = useState("all");
   // graph state define here
   const [viewData,setViewData] = useState('table');
+  // handing the edit and delte data 
+  const [editable,setEditable] = useState(null)
 
   //table data
   const columns = [
@@ -47,6 +49,15 @@ const Homepage = () => {
     },
     {
       title: "Actions",
+      render : (text , record) => (
+        <div>
+          <EditOutlined onClick={() => {
+            setEditable(record)
+            setShowModal(true);
+          }} />
+          <DeleteFilled className="mx-2"/>
+        </div>
+      )
     },
   ];
 
@@ -87,6 +98,7 @@ const Homepage = () => {
       setLoading(false);
       message.success("Transaction Added Successfully");
       setShowModal(false);
+      setEditable(null);
       window.location.reload();
     } catch (error) {
       setLoading(false);
@@ -175,12 +187,12 @@ const Homepage = () => {
 
       {/* model form */}
       <Modal
-        title="Add Transaction"
+        title={editable ? 'Edit Transaction' : 'Add Transection'}
         open={showModal}
         onCancel={() => setShowModal(false)}
         footer={false}
       >
-        <Form Layout="vertical" onFinish={handleSubmit}>
+        <Form Layout="vertical" onFinish={handleSubmit} initialValues={editable}>
           <Form.Item label="amount" name="amount">
             <Input type="text" />
           </Form.Item>
