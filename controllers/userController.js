@@ -6,7 +6,6 @@ const userModel = require("../models/userModel");
 
 const loginController = async(req,res) => {
 
-
     try {
         //desstructure user login data 
 
@@ -54,15 +53,4 @@ const registerController = async(req,res) => {
 }
 
 
-
 module.exports = { loginController, registerController };
-
-
-// uttar - north -rog
-// pachim  - west - chintaye
-
-// south -
-// east -
-
-// north 
-// east
