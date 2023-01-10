@@ -39,7 +39,6 @@ const Analytics = ({ allTransection }) => {
   const totalExpenseTurnover = allTransection
     .filter((transaction) => transaction.type === "expense")
     .reduce((acc, transaction) => acc + transaction.amount, 0);
-
   const totalIncomeTurnoverPercent =
     (totalIncomeTurnover / totalTurnover) * 100;
   const totalExpenseTurnoverPercent =
