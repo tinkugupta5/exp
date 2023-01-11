@@ -43,7 +43,6 @@ const Homepage = () => {
       title: "Category",
       dataIndex: "category",
     },
-    
     {
       title: "Refrence",
       dataIndex: "refrence",
