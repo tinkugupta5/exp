@@ -7,7 +7,7 @@ import { message } from "antd";
 import Spinner from "../components/Spinner";
 import moment from "moment";
 import Analytics from "../components/Analytics"; 
-import { UnorderedListOutlined, AreaChartOutlined , EditOutlined,DeleteFilled, DeleteColumnOutlined } from "@ant-design/icons";
+import { UnorderedListOutlined, AreaChartOutlined , EditOutlined, DeleteOutlined } from "@ant-design/icons";
 const { RangePicker } = DatePicker;
 // import { json } from 'react-router-dom';
 
@@ -55,7 +55,7 @@ const Homepage = () => {
             setEditable(record)
             setShowModal(true);
           }} />
-          <DeleteFilled className="mx-2"/>
+          <DeleteOutlined className="mx-2"/>
         </div>
       )
     },
@@ -90,13 +90,32 @@ const Homepage = () => {
   const handleSubmit = async (values) => {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
-      setLoading(true);   
-      await axios.post("/transections/add-transection", {
-        ...values,
-        userid: user._id,
-      });
-      setLoading(false);
-      message.success("Transaction Added Successfully");
+      setLoading(true);  
+      
+      // in if condition edit transaction is there 
+      if(editable)
+      {
+        await axios.post("/transections/edit-transection", {
+          payload : {
+            ...values,
+            userId:user._id
+          },
+          transacationId:editable._id
+        });
+        setLoading(false);
+        message.success("Transaction Updated Successfully");
+
+      }
+      else{
+        await axios.post("/transections/add-transection", {
+          ...values,
+          userid: user._id,
+        });
+        setLoading(false);
+        message.success("Transaction Added Successfully");
+
+      }
+     
       setShowModal(false);
       setEditable(null);
       window.location.reload();
@@ -173,7 +192,11 @@ const Homepage = () => {
           </button>
         </div>
       </div>
+
+
+
       {/* filter end */}
+
 
       {/*  table data  */}
       <div className="content">
@@ -183,7 +206,12 @@ const Homepage = () => {
           <Analytics allTransection={allTransection} />
         )}
       </div>
+
+
+
       {/* table end */}
+
+
 
       {/* model form */}
       <Modal

@@ -1,5 +1,7 @@
 const transectionModel = require("../models/transectionModel");
 const moment = require("moment");
+
+// get controller
 const getAllTransection = async (req, res) => {
   try {
     const { frequency, selectedDate, type } = req.body;
@@ -26,6 +28,27 @@ const getAllTransection = async (req, res) => {
   }
 };
 
+
+// edit controller
+const editTransection = async(req,res) => {
+
+  try {
+
+    // writing query in mongo db 
+    await transectionModel.findOneAndUpdate({_id:req.body.transacationId},req.body.payload);
+    res.status(200).send('Edit Successfully');
+    
+  } catch (error) {
+
+    console.log(error);
+    res.status(500).json(error)
+    
+  }
+
+}
+
+
+// add transaction controller 
 const addTransection = async (req, res) => {
   try {
     // const newTransection = new transectionModel(req.body);
@@ -38,4 +61,4 @@ const addTransection = async (req, res) => {
   }
 };
 
-module.exports = { getAllTransection, addTransection };
+module.exports = { getAllTransection, addTransection , editTransection };
