@@ -20,15 +20,13 @@ const Register = () => {
             navigate('/login')           
         } catch (error) {
             setLoading(false)
-            message.error("Something went wrong")
-            
+            message.error("Something went wrong")            
         }
     }
 
      //prevent for login user
   useEffect(() => {
     if (localStorage.getItem("user")) {
-      
       navigate("/");
     }
   }, [navigate]);
